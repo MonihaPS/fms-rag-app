@@ -1,0 +1,33 @@
+# --- SPECIAL CONFIG: Force CPU versions to save disk space ---
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# --- Data Processing ---
+pandas==2.2.0
+openpyxl==3.1.2
+scikit-learn  # Added for ML metrics (accuracy_score)
+
+# --- AI & RAG Framework ---
+langchain==0.1.16
+langchain-community==0.0.34
+langchain-openai==0.1.3
+langchain-core==0.1.45
+
+# --- Machine Learning (Hugging Face) ---
+torch         # Will grab CPU version automatically due to line 1
+torchvision   # Will grab CPU version automatically
+torchaudio    # Will grab CPU version automatically
+transformers
+datasets
+accelerate
+
+# --- Vector Database ---
+chromadb==0.4.24
+
+# --- API & Server ---
+fastapi==0.110.1
+uvicorn==0.29.0
+pydantic==2.7.0
+
+# --- Utilities ---
+python-dotenv==1.0.1
+httpx==0.27.0

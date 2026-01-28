@@ -1,0 +1,1910 @@
+[
+    {
+        "id": "sq_1_0",
+        "exercise_name": "B/L WALL ASSISTED SQUAT",
+        "category": "WALL SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 corrective drill. Uses the wall to offload bodyweight and guide the vertical spine position. Ideal for athletes with FMS Score 1 who cannot maintain balance in a deep squat.",
+        "description_source": "Manual",
+        "tags": [
+            "level_1",
+            "pattern_squat",
+            "wall_squats"
+        ]
+    },
+    {
+        "id": "sq_2_1",
+        "exercise_name": "U/L WALL ASSISTED SQUAT",
+        "category": "WALL SQUATS",
+        "difficulty_level": 2,
+        "description": "Level 2 progression. Introduces a single-leg bias while maintaining wall support. Use to identify and correct left/right imbalances in the squat pattern before removing support.",
+        "description_source": "Manual",
+        "tags": [
+            "level_2",
+            "pattern_squat",
+            "wall_squats"
+        ]
+    },
+    {
+        "id": "sq_3_2",
+        "exercise_name": "BAND RESISTED WALL SQUATS",
+        "category": "WALL SQUATS",
+        "difficulty_level": 3,
+        "description": "Level 3 activation drill. Adds RNT (Reactive Neuromuscular Training) to pull the athlete into the mistake",
+        "description_source": "Manual",
+        "tags": [
+            "level_3",
+            "pattern_squat",
+            "fix_knee_valgus",
+            "rnt_correction",
+            "wall_squats"
+        ]
+    },
+    {
+        "id": "sq_4_3",
+        "exercise_name": "WALL SUPPORTED FIG 4 SQUATS",
+        "category": "WALL SQUATS",
+        "difficulty_level": 4,
+        "description": "Level 4 mobility/stability hybrid. The Figure-4 position challenges hip mobility while the wall ensures safety. Use for athletes needing hip opening combined with pattern work.",
+        "description_source": "Manual",
+        "tags": [
+            "level_4",
+            "pattern_squat",
+            "wall_squats"
+        ]
+    },
+    {
+        "id": "sq_5_4",
+        "exercise_name": "LOADED WALL SQUATS",
+        "category": "WALL SQUATS",
+        "difficulty_level": 5,
+        "description": "Level 5 strength-endurance. Adds external load to the static wall hold. Builds quad capacity and trunk stiffness without the complexity of a free-standing squat.",
+        "description_source": "Manual",
+        "tags": [
+            "level_5",
+            "pattern_squat",
+            "wall_squats"
+        ]
+    },
+    {
+        "id": "sq_6_5",
+        "exercise_name": "ZERCHER HOLD WALL SQUATS",
+        "category": "WALL SQUATS",
+        "difficulty_level": 6,
+        "description": "Level 6 advanced stability. The Zercher position (bar in elbows) forces high anterior core engagement. Excellent for athletes who dump forward in their squat pattern.",
+        "description_source": "Manual",
+        "tags": [
+            "level_6",
+            "wall_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_6",
+        "exercise_name": "STABILITY BALL WALL SQUATS",
+        "category": "WALL SQUATS",
+        "difficulty_level": 7,
+        "description": "Level 7 smoothness drill. The ball reduces friction",
+        "description_source": "Manual",
+        "tags": [
+            "pattern_squat",
+            "wall_squats",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_1_7",
+        "exercise_name": "BAND ASSISTED SQUATS",
+        "category": "SUPPORTED SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 regression. The band provides lift at the bottom (sticking point)",
+        "description_source": "Manual",
+        "tags": [
+            "pattern_squat",
+            "fix_knee_valgus",
+            "rnt_correction",
+            "supported_squats",
+            "level_1"
+        ]
+    },
+    {
+        "id": "sq_2_8",
+        "exercise_name": "TRX SUPPORTED SQUATS",
+        "category": "SUPPORTED SQUATS",
+        "difficulty_level": 2,
+        "description": "Level 2 assisted pattern. Uses suspension straps to allow the athlete to \"sit back\" further than normal",
+        "description_source": "Manual",
+        "tags": [
+            "level_2",
+            "supported_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_3_9",
+        "exercise_name": "PARTNER ASSISTED SQUATS",
+        "category": "SUPPORTED SQUATS",
+        "difficulty_level": 3,
+        "description": "Level 3 tactile cueing. A partner provides specific resistance or assistance. useful for coaching precise torso angles and knee tracking in real-time.",
+        "description_source": "Manual",
+        "tags": [
+            "level_3",
+            "supported_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_10",
+        "exercise_name": "BAR SUPPORTED SQUATS",
+        "category": "SUPPORTED SQUATS",
+        "difficulty_level": 4,
+        "description": "Level 4 transition drill. Using a fixed bar for balance allows the athlete to self-correct stability issues while bearing mostly their own weight.",
+        "description_source": "Manual",
+        "tags": [
+            "supported_squats",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_1_11",
+        "exercise_name": "HEEL RAISED BAND ASSISTED",
+        "category": "HEEL RAISED SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 mobility bypass. Elevating the heels removes ankle mobility restrictions. Combined with band assistance",
+        "description_source": "Manual",
+        "tags": [
+            "fix_knee_valgus",
+            "pattern_squat",
+            "fix_heels_lift",
+            "rnt_correction",
+            "level_1",
+            "heel_raised_squats"
+        ]
+    },
+    {
+        "id": "sq_2_12",
+        "exercise_name": "HEEL RAISED WALL SUPPORTED SQUATS",
+        "category": "HEEL RAISED SQUATS",
+        "difficulty_level": 2,
+        "description": "Level 2 patterning. Removes ankle stiffness variable while using the wall for posture. Isolate hip mechanics without fighting ankle restrictions.",
+        "description_source": "Manual",
+        "tags": [
+            "fix_heels_lift",
+            "level_2",
+            "pattern_squat",
+            "heel_raised_squats"
+        ]
+    },
+    {
+        "id": "sq_3_13",
+        "exercise_name": "HEEL RAISED BW SQUAT",
+        "category": "HEEL RAISED SQUATS",
+        "difficulty_level": 3,
+        "description": "Level 3 standard regression. The \"Cyclist Squat\" position. Allows for a purely vertical torso and deep knee flexion. Diagnostic tool: If they can squat here but not flat",
+        "description_source": "Manual",
+        "tags": [
+            "fix_heels_lift",
+            "level_3",
+            "pattern_squat",
+            "heel_raised_squats"
+        ]
+    },
+    {
+        "id": "sq_4_14",
+        "exercise_name": "HEEL RAISED GOBLET SQUAT",
+        "category": "HEEL RAISED SQUATS",
+        "difficulty_level": 4,
+        "description": "Level 4 loaded regression. Adds anterior load to the heel-raised position. The counterbalance of the weight often cleans up the squat pattern instantly.",
+        "description_source": "Manual",
+        "tags": [
+            "fix_heels_lift",
+            "level_4",
+            "pattern_squat",
+            "heel_raised_squats"
+        ]
+    },
+    {
+        "id": "sq_5_15",
+        "exercise_name": "CYCLIC SQUAT",
+        "category": "HEEL RAISED SQUATS",
+        "difficulty_level": 5,
+        "description": "Level 5 rhythm drill. Continuous tension squats with elevated heels. Builds vastus medialis strength and knee resilience under control.",
+        "description_source": "Manual",
+        "tags": [
+            "fix_heels_lift",
+            "level_5",
+            "pattern_squat",
+            "heel_raised_squats"
+        ]
+    },
+    {
+        "id": "sq_6_16",
+        "exercise_name": "HEEL RAISED DB SQUAT",
+        "category": "HEEL RAISED SQUATS",
+        "difficulty_level": 6,
+        "description": "Level 6 strength progression. Loading the heel-elevated pattern with dumbbells. Bridges the gap between corrective mobility work and real strength training.",
+        "description_source": "Manual",
+        "tags": [
+            "fix_heels_lift",
+            "level_6",
+            "heel_raised_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_1_17",
+        "exercise_name": "B/L BW SQUATS / PRISIONER SQUATS",
+        "category": "BW SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 baseline pattern. The Prisoner position (hands behind head) forces thoracic extension",
+        "description_source": "Manual",
+        "tags": [
+            "level_1",
+            "pattern_squat",
+            "bw_squats"
+        ]
+    },
+    {
+        "id": "sq_2_18",
+        "exercise_name": "GORILLA SQUATS",
+        "category": "BW SQUATS",
+        "difficulty_level": 2,
+        "description": "Level 2 mobility drill. Starting from a deep hip hinge/stretch position and dropping into the squat. Excellent for mobilizing the hips dynamically.",
+        "description_source": "Manual",
+        "tags": [
+            "level_2",
+            "pattern_squat",
+            "bw_squats"
+        ]
+    },
+    {
+        "id": "sq_3_19",
+        "exercise_name": "HINDU SQUATS",
+        "category": "BW SQUATS",
+        "difficulty_level": 3,
+        "description": "Level 3 flow/endurance. A high-rep bodyweight movement involving heel elevation and arm swings. Builds coordination and joint flushing.",
+        "description_source": "Manual",
+        "tags": [
+            "level_3",
+            "pattern_squat",
+            "bw_squats"
+        ]
+    },
+    {
+        "id": "sq_4_20",
+        "exercise_name": "OH WALL SQUATS",
+        "category": "BW SQUATS",
+        "difficulty_level": 4,
+        "description": "Level 4 mobility challenge. Facing the wall to force an upright torso. If the athlete leans forward",
+        "description_source": "Manual",
+        "tags": [
+            "pattern_squat",
+            "level_4",
+            "bw_squats"
+        ]
+    },
+    {
+        "id": "sq_5_21",
+        "exercise_name": "STAGGERED STANCE BW SQUATS",
+        "category": "BW SQUATS",
+        "difficulty_level": 5,
+        "description": "Level 5 stability bias. One foot slightly forward shifts the center of mass. A regression from single-leg squats that builds independent leg strength.",
+        "description_source": "Manual",
+        "tags": [
+            "level_5",
+            "pattern_squat",
+            "bw_squats"
+        ]
+    },
+    {
+        "id": "sq_6_22",
+        "exercise_name": "NARROW STANCE BW SQUATS",
+        "category": "BW SQUATS",
+        "difficulty_level": 6,
+        "description": "Level 6 mobility challenge. Feet together demands higher ankle mobility and balance. Use to refine the midline stability of the squat.",
+        "description_source": "Manual",
+        "tags": [
+            "level_6",
+            "pattern_squat",
+            "bw_squats"
+        ]
+    },
+    {
+        "id": "sq_7_23",
+        "exercise_name": "CANDLE STICK OH SQUATS",
+        "category": "BW SQUATS",
+        "difficulty_level": 7,
+        "description": "Level 7 advanced mobility. A gymnastics-style squat requiring extreme core compression and mobility. Only for athletes with FMS Score 3.",
+        "description_source": "Manual",
+        "tags": [
+            "level_7",
+            "pattern_squat",
+            "bw_squats"
+        ]
+    },
+    {
+        "id": "sq_8_24",
+        "exercise_name": "CYCLIC SQUATS",
+        "category": "BW SQUATS",
+        "difficulty_level": 8,
+        "description": "A Level 8 BW SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_8",
+            "pattern_squat",
+            "bw_squats"
+        ]
+    },
+    {
+        "id": "sq_9_25",
+        "exercise_name": "SISSY SQUATS",
+        "category": "BW SQUATS",
+        "difficulty_level": 9,
+        "description": "Level 10 isolation. Extreme knee flexion and quad isolation. Not a functional pattern but a high-performance accessory for knee tendon health.",
+        "description_source": "Manual",
+        "tags": [
+            "level_9",
+            "pattern_squat",
+            "bw_squats"
+        ]
+    },
+    {
+        "id": "sq_1_26",
+        "exercise_name": "BW SUMO SQUATS",
+        "category": "SUMO SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 hip pattern. Wide stance biases the adductors and allows for a more upright torso. Use for athletes with long femurs who struggle with conventional stance.",
+        "description_source": "Manual",
+        "tags": [
+            "level_1",
+            "sumo_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_2_27",
+        "exercise_name": "BANDED SUMO SQUATS",
+        "category": "SUMO SQUATS",
+        "difficulty_level": 2,
+        "description": "Level 2 RNT drill. Bands around knees force the athlete to drive knees out (abduction)",
+        "description_source": "Manual",
+        "tags": [
+            "level_2",
+            "fix_knee_valgus",
+            "pattern_squat",
+            "rnt_correction",
+            "sumo_squats"
+        ]
+    },
+    {
+        "id": "sq_3_28",
+        "exercise_name": "KB HOLD SUMO SQUATS (HANG/ GOBLET)",
+        "category": "SUMO SQUATS",
+        "difficulty_level": 3,
+        "description": "Level 3 loaded patterning. The wide base provides high stability",
+        "description_source": "Manual",
+        "tags": [
+            "level_3",
+            "sumo_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_29",
+        "exercise_name": "DB SUMO SQUATS (HANG/ GOBLET)",
+        "category": "SUMO SQUATS",
+        "difficulty_level": 4,
+        "description": "Level 4 strength. Dumbbell variation allows for independent hand positioning",
+        "description_source": "Manual",
+        "tags": [
+            "sumo_squats",
+            "level_4",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_5_30",
+        "exercise_name": "BB SUMO SQUATS (HANG/ RACKED)",
+        "category": "SUMO SQUATS",
+        "difficulty_level": 5,
+        "description": "Level 5 strength. Barbell loading increases systemic demand. The \"Hang\" position keeps the weight center of mass low",
+        "description_source": "Manual",
+        "tags": [
+            "level_5",
+            "sumo_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_31",
+        "exercise_name": "PLATE HOLD SUMO SQUATS",
+        "category": "SUMO SQUATS",
+        "difficulty_level": 6,
+        "description": "Level 6 anterior core. Holding a plate out front acts as a counterbalance",
+        "description_source": "Manual",
+        "tags": [
+            "level_6",
+            "sumo_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_32",
+        "exercise_name": "ZERCHER HOLD SUMO SQUATS",
+        "category": "SUMO SQUATS",
+        "difficulty_level": 7,
+        "description": "Level 7 anti-flexion. The Zercher carry forces the athlete to fight against collapsing forward",
+        "description_source": "Manual",
+        "tags": [
+            "sumo_squats",
+            "pattern_squat",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_8_33",
+        "exercise_name": "JEFFERSON HOLD SUMO SQUATS",
+        "category": "SUMO SQUATS",
+        "difficulty_level": 8,
+        "description": "Level 8 multi-planar. An asymmetrical barbell lift that challenges rotation and anti-rotation stability.",
+        "description_source": "Manual",
+        "tags": [
+            "level_8",
+            "sumo_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_1_34",
+        "exercise_name": "BW B/L BOX SQUATS",
+        "category": "BOX SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 depth control. The box provides a tactile target",
+        "description_source": "Manual",
+        "tags": [
+            "box_squats",
+            "level_1",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_2_35",
+        "exercise_name": "BW U/L BOX SQUATS",
+        "category": "BOX SQUATS",
+        "difficulty_level": 2,
+        "description": "Level 2 asymmetry check. Single leg box squat. limits the range of motion to a safe height while building unilateral strength.",
+        "description_source": "Manual",
+        "tags": [
+            "level_2",
+            "box_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_3_36",
+        "exercise_name": "BW LOW BOX SQUATS (B/L & U/L)",
+        "category": "BOX SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 BOX SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "box_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_37",
+        "exercise_name": "KB GOBLET HOLD BOX SQUATS (B/L & U/L)",
+        "category": "BOX SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 BOX SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "box_squats",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_5_38",
+        "exercise_name": "DB BOX SQUATS (B/L & U/L)",
+        "category": "BOX SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 BOX SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "box_squats",
+            "level_5",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_39",
+        "exercise_name": "BB BOX SQUATS (FRONT & BACK RACK)",
+        "category": "BOX SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 BOX SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "box_squats",
+            "level_6",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_40",
+        "exercise_name": "OH LOADED BOX SQUATS",
+        "category": "BOX SQUATS",
+        "difficulty_level": 7,
+        "description": "Level 7 overhead stability. Combining the box depth check with the overhead position to ruthlessly audit thoracic and shoulder mobility.",
+        "description_source": "Manual",
+        "tags": [
+            "box_squats",
+            "pattern_squat",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_1_41",
+        "exercise_name": "DB GOBLET SQUATS",
+        "category": "GOBLET SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 foundational strength. The \"King of Corrections.\" The anterior load counterbalances the athlete",
+        "description_source": "Manual",
+        "tags": [
+            "level_1",
+            "pattern_squat",
+            "goblet_squats"
+        ]
+    },
+    {
+        "id": "sq_2_42",
+        "exercise_name": "KB TOP UP GOBLET SQUATS",
+        "category": "GOBLET SQUATS",
+        "difficulty_level": 2,
+        "description": "Level 2 grip/stability. Holding the KB upside down (bottoms up) demands intense grip and shoulder stability",
+        "description_source": "Manual",
+        "tags": [
+            "level_2",
+            "pattern_squat",
+            "goblet_squats"
+        ]
+    },
+    {
+        "id": "sq_3_43",
+        "exercise_name": "KB BOTTOM UP GOBLET SQUATS",
+        "category": "GOBLET SQUATS",
+        "difficulty_level": 3,
+        "description": "Level 3 classic loading. The standard for building squat volume safely. Self-limiting: if the upper back rounds",
+        "description_source": "Manual",
+        "tags": [
+            "level_3",
+            "pattern_squat",
+            "goblet_squats"
+        ]
+    },
+    {
+        "id": "sq_4_44",
+        "exercise_name": "KB SIDE GOBLET SQUATS",
+        "category": "GOBLET SQUATS",
+        "difficulty_level": 4,
+        "description": "Level 4 lateral bias. Holding the weight to one side (offset) forces the obliques to fight rotation.",
+        "description_source": "Manual",
+        "tags": [
+            "pattern_squat",
+            "level_4",
+            "goblet_squats"
+        ]
+    },
+    {
+        "id": "sq_1_45",
+        "exercise_name": "KB GOBLET SQUATS",
+        "category": "KB SQUATS",
+        "difficulty_level": 1,
+        "description": "A Level 1 KB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "kb_squats",
+            "level_1",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_2_46",
+        "exercise_name": "KB B/L RACKED SQUATS",
+        "category": "KB SQUATS",
+        "difficulty_level": 2,
+        "description": "Level 2 front load. Double kettlebells in the rack position compress the chest",
+        "description_source": "Manual",
+        "tags": [
+            "level_2",
+            "kb_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_3_47",
+        "exercise_name": "KB U/L RACKED SQUATS",
+        "category": "KB SQUATS",
+        "difficulty_level": 3,
+        "description": "Level 3 offset load. One KB racked. The unequal load tries to pull the athlete sideways; the core must fight to stay vertical.",
+        "description_source": "Manual",
+        "tags": [
+            "level_3",
+            "kb_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_48",
+        "exercise_name": "KB SUITCASE SQUATS",
+        "category": "KB SQUATS",
+        "difficulty_level": 4,
+        "description": "Level 4 anti-lateral flexion. Holding weights at sides (like suitcases). If the core is weak",
+        "description_source": "Manual",
+        "tags": [
+            "kb_squats",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_5_49",
+        "exercise_name": "KB B/L RACKED WITH THRUSTER SQUATS",
+        "category": "KB SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 KB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "kb_squats",
+            "level_5",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_50",
+        "exercise_name": "KB CYCLIC SQUATS",
+        "category": "KB SQUATS",
+        "difficulty_level": 6,
+        "description": "Level 8 conditioning. Continuous tension reps with Kettlebells. High metabolic demand for conditioning phases.",
+        "description_source": "Manual",
+        "tags": [
+            "kb_squats",
+            "level_6",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_1_51",
+        "exercise_name": "DB GOBLET SQUATS",
+        "category": "DB SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 foundational strength. The \"King of Corrections.\" The anterior load counterbalances the athlete",
+        "description_source": "Manual",
+        "tags": [
+            "db_squats",
+            "level_1",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_2_52",
+        "exercise_name": "DB HOLD SQUATS (SUITCASE/ FARMERS)",
+        "category": "DB SQUATS",
+        "difficulty_level": 2,
+        "description": "A Level 2 DB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_2",
+            "db_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_3_53",
+        "exercise_name": "DB RACKED SQUATS (B/L & U/L)",
+        "category": "DB SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 DB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "db_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_54",
+        "exercise_name": "DB RACKED THRUSTER SQUATS (B/L & U/L)",
+        "category": "DB SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 DB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "db_squats",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_5_55",
+        "exercise_name": "DB OVERHEAD SQUATS (B/L & U/L)",
+        "category": "DB SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 DB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "db_squats",
+            "level_5",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_56",
+        "exercise_name": "DB CYCLIC SQUATS",
+        "category": "DB SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 DB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "db_squats",
+            "level_6",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_1_57",
+        "exercise_name": "BB BOX SQUATS (B/L & U/L)",
+        "category": "BB SQUATS",
+        "difficulty_level": 1,
+        "description": "A Level 1 BB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "bb_squats",
+            "level_1",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_2_58",
+        "exercise_name": "BB SUMO SQUATS",
+        "category": "BB SQUATS",
+        "difficulty_level": 2,
+        "description": "A Level 2 BB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "bb_squats",
+            "level_2",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_3_59",
+        "exercise_name": "BB BACK RACK SQUATS (SMITH, PIN TO FULL RANGE)",
+        "category": "BB SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 BB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "bb_squats",
+            "level_3",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_60",
+        "exercise_name": "BB FRONT RACK SQUATS (SMITH, PIN TO FULL RANGE)",
+        "category": "BB SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 BB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "bb_squats",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_5_61",
+        "exercise_name": "BB HACK SQUATS",
+        "category": "BB SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 BB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "bb_squats",
+            "level_5",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_62",
+        "exercise_name": "BB OVERHEAD SQUATS",
+        "category": "BB SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 BB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "bb_squats",
+            "level_6",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_63",
+        "exercise_name": "BB ZERCHER HOLD SQUATS",
+        "category": "BB SQUATS",
+        "difficulty_level": 7,
+        "description": "A Level 7 BB SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "bb_squats",
+            "pattern_squat",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_1_64",
+        "exercise_name": "TRX/ BAND ASSISTED SPLIT SQUATS",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 regression. Split stance with upper body support. Removes balance as a limiting factor to focus on hip separation.",
+        "description_source": "Manual",
+        "tags": [
+            "fix_knee_valgus",
+            "pattern_squat",
+            "rnt_correction",
+            "split_squats",
+            "level_1"
+        ]
+    },
+    {
+        "id": "sq_2_65",
+        "exercise_name": "BW SPLIT SQUATS",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 2,
+        "description": "Level 2 baseline stability. Static lunge pattern. The foundation of all single-leg athletic movement.",
+        "description_source": "Manual",
+        "tags": [
+            "level_2",
+            "split_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_3_66",
+        "exercise_name": "BAND RESISTED SPLIT SQUATS (LEADING LEG)",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 SPLIT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "fix_knee_valgus",
+            "pattern_squat",
+            "rnt_correction",
+            "split_squats"
+        ]
+    },
+    {
+        "id": "sq_4_67",
+        "exercise_name": "FOOT ELEVATED SPLIT SQUATS (FRONT, REAR & B/L)",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 SPLIT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "split_squats",
+            "level_4",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_5_68",
+        "exercise_name": "KB SPLIT SQUATS (GOBLET, B/L & U/L RACKED)",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 SPLIT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_5",
+            "split_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_69",
+        "exercise_name": "DB SPLIT SQUATS (U/L, CONTRA, SUITCASE, RACKED)",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 SPLIT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_6",
+            "split_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_70",
+        "exercise_name": "SAND BAG SPLIT SQUATS (FRONT, U/L, B/L & BACK)",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 7,
+        "description": "A Level 7 SPLIT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "split_squats",
+            "pattern_squat",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_8_71",
+        "exercise_name": "BB SPLIT SQUATS (FRONT & BACK / JEFFERSON)",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 8,
+        "description": "A Level 8 SPLIT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_8",
+            "split_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_9_72",
+        "exercise_name": "OH SPLIT SQUATS (KB, DB, PLATES, SB, BB)",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 9,
+        "description": "A Level 9 SPLIT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_9",
+            "split_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_10_73",
+        "exercise_name": "LANDMINE SPLIT SQUATS (B/L & U/L)",
+        "category": "SPLIT SQUATS",
+        "difficulty_level": 10,
+        "description": "A Level 10 SPLIT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_10",
+            "split_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_1_74",
+        "exercise_name": "TRX/ BAND ASSISTED LUNGES",
+        "category": "LUNGE",
+        "difficulty_level": 1,
+        "description": "A Level 1 LUNGE exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lunge",
+            "fix_knee_valgus",
+            "pattern_lunge",
+            "rnt_correction",
+            "level_1"
+        ]
+    },
+    {
+        "id": "sq_2_75",
+        "exercise_name": "BW LUNGES (FWD, LAT, REV)",
+        "category": "LUNGE",
+        "difficulty_level": 2,
+        "description": "A Level 2 LUNGE exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lunge",
+            "pattern_lunge",
+            "level_2"
+        ]
+    },
+    {
+        "id": "sq_3_76",
+        "exercise_name": "BW LUNGE SLIDERS (FWD, LAT, REV)",
+        "category": "LUNGE",
+        "difficulty_level": 3,
+        "description": "A Level 3 LUNGE exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "lunge",
+            "pattern_lunge"
+        ]
+    },
+    {
+        "id": "sq_4_77",
+        "exercise_name": "CURTSY LUNGES (BW/SLIDER/ LOADED)",
+        "category": "LUNGE",
+        "difficulty_level": 4,
+        "description": "A Level 4 LUNGE exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lunge",
+            "level_4",
+            "pattern_lunge"
+        ]
+    },
+    {
+        "id": "sq_5_78",
+        "exercise_name": "LOADED LUNGES (KB, DB, SB, PLATE, BB)",
+        "category": "LUNGE",
+        "difficulty_level": 5,
+        "description": "A Level 5 LUNGE exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lunge",
+            "level_5",
+            "pattern_lunge"
+        ]
+    },
+    {
+        "id": "sq_6_79",
+        "exercise_name": "SWITCH LUNGES (BAND ASSISTED, BW, LOADED)",
+        "category": "LUNGE",
+        "difficulty_level": 6,
+        "description": "A Level 6 LUNGE exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lunge",
+            "fix_knee_valgus",
+            "pattern_lunge",
+            "rnt_correction",
+            "level_6"
+        ]
+    },
+    {
+        "id": "sq_7_80",
+        "exercise_name": "WALKING LUNGES (BAND RESISTED, BW, LOADED)",
+        "category": "LUNGE",
+        "difficulty_level": 7,
+        "description": "A Level 7 LUNGE exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lunge",
+            "fix_knee_valgus",
+            "pattern_lunge",
+            "rnt_correction",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_8_81",
+        "exercise_name": "5 'O' CLOCK LUNGE (BANDED/ BW/ LOADED)",
+        "category": "LUNGE",
+        "difficulty_level": 8,
+        "description": "A Level 8 LUNGE exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_8",
+            "lunge",
+            "fix_knee_valgus",
+            "pattern_lunge",
+            "rnt_correction"
+        ]
+    },
+    {
+        "id": "sq_9_82",
+        "exercise_name": "LANDMINE LUNGES",
+        "category": "LUNGE",
+        "difficulty_level": 9,
+        "description": "Level 9 loaded arc. Combining the dynamic step of a lunge with the unique leverage of the Landmine.",
+        "description_source": "Manual",
+        "tags": [
+            "lunge",
+            "level_9",
+            "pattern_lunge"
+        ]
+    },
+    {
+        "id": "sq_10_83",
+        "exercise_name": "LUNGE INFINITY",
+        "category": "LUNGE",
+        "difficulty_level": 10,
+        "description": "A Level 10 LUNGE exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lunge",
+            "level_10",
+            "pattern_lunge"
+        ]
+    },
+    {
+        "id": "sq_1_84",
+        "exercise_name": "BAND RESISTED LANDMINE SQUATS",
+        "category": "LANDMINE SQUATS",
+        "difficulty_level": 1,
+        "description": "A Level 1 LANDMINE SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "fix_knee_valgus",
+            "pattern_squat",
+            "rnt_correction",
+            "landmine_squats",
+            "level_1"
+        ]
+    },
+    {
+        "id": "sq_2_85",
+        "exercise_name": "LANDMINE BOX SQUATS",
+        "category": "LANDMINE SQUATS",
+        "difficulty_level": 2,
+        "description": "A Level 2 LANDMINE SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "landmine_squats",
+            "level_2",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_3_86",
+        "exercise_name": "LUMBER JACK LANDMINE SQUATS",
+        "category": "LANDMINE SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 LANDMINE SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "landmine_squats",
+            "level_3",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_87",
+        "exercise_name": "LANDMINE LOADED B/L SQUATS",
+        "category": "LANDMINE SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 LANDMINE SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "landmine_squats",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_5_88",
+        "exercise_name": "LANDMINE SPLIT SQUATS",
+        "category": "LANDMINE SQUATS",
+        "difficulty_level": 5,
+        "description": "Level 8 guided arc. The fixed arc of the bar provides stability while allowing heavy loading in a unilateral pattern.",
+        "description_source": "Manual",
+        "tags": [
+            "landmine_squats",
+            "level_5",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_89",
+        "exercise_name": "LANDMINE SQUAT THRUSTERS",
+        "category": "LANDMINE SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 LANDMINE SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "landmine_squats",
+            "level_6",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_90",
+        "exercise_name": "LANDMINE HACK SQUATS",
+        "category": "LANDMINE SQUATS",
+        "difficulty_level": 7,
+        "description": "A Level 7 LANDMINE SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "landmine_squats",
+            "pattern_squat",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_8_91",
+        "exercise_name": "LANDMINE SPILT STANCE HACK SQUATS",
+        "category": "LANDMINE SQUATS",
+        "difficulty_level": 8,
+        "description": "A Level 8 LANDMINE SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "landmine_squats",
+            "level_8",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_1_92",
+        "exercise_name": "BANDED FRONT SQUATS",
+        "category": "FRONT SQUATS",
+        "difficulty_level": 1,
+        "description": "Level 1 RNT. The band pulls the athlete forward",
+        "description_source": "Manual",
+        "tags": [
+            "pattern_squat",
+            "fix_knee_valgus",
+            "rnt_correction",
+            "level_1",
+            "front_squats"
+        ]
+    },
+    {
+        "id": "sq_2_93",
+        "exercise_name": "LANDMINE FRONT SQUATS (B/L & U/L)",
+        "category": "FRONT SQUATS",
+        "difficulty_level": 2,
+        "description": "A Level 2 FRONT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_2",
+            "pattern_squat",
+            "front_squats"
+        ]
+    },
+    {
+        "id": "sq_3_94",
+        "exercise_name": "DOUBLE RACKED FRONT SQUATS (DB, KB, MB)",
+        "category": "FRONT SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 FRONT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "pattern_squat",
+            "front_squats"
+        ]
+    },
+    {
+        "id": "sq_4_95",
+        "exercise_name": "SINGLE RACKED FRONT SQUATS (DB, KB, MB)",
+        "category": "FRONT SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 FRONT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "pattern_squat",
+            "level_4",
+            "front_squats"
+        ]
+    },
+    {
+        "id": "sq_5_96",
+        "exercise_name": "BB BOX FRONT SQUATS",
+        "category": "FRONT SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 FRONT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_5",
+            "pattern_squat",
+            "front_squats"
+        ]
+    },
+    {
+        "id": "sq_6_97",
+        "exercise_name": "BB FRONT RACKED SQUATS",
+        "category": "FRONT SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 FRONT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_6",
+            "pattern_squat",
+            "front_squats"
+        ]
+    },
+    {
+        "id": "sq_7_98",
+        "exercise_name": "BB ANDERSON FRONT SQUATS",
+        "category": "FRONT SQUATS",
+        "difficulty_level": 7,
+        "description": "Level 7 starting strength. Starting from a dead stop on pins at the bottom. Eliminates the stretch reflex to build pure starting power.",
+        "description_source": "Manual",
+        "tags": [
+            "level_7",
+            "pattern_squat",
+            "front_squats"
+        ]
+    },
+    {
+        "id": "sq_8_99",
+        "exercise_name": "BOTTOM HALF FRONT SQUATS",
+        "category": "FRONT SQUATS",
+        "difficulty_level": 8,
+        "description": "A Level 8 FRONT SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_8",
+            "pattern_squat",
+            "front_squats"
+        ]
+    },
+    {
+        "id": "sq_1_100",
+        "exercise_name": "BANDED BACK SQUATS",
+        "category": "BACK SQUATS",
+        "difficulty_level": 1,
+        "description": "A Level 1 BACK SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "pattern_squat",
+            "fix_knee_valgus",
+            "rnt_correction",
+            "level_1",
+            "back_squats"
+        ]
+    },
+    {
+        "id": "sq_2_101",
+        "exercise_name": "SANDBAG RACKED BACK SQUATS",
+        "category": "BACK SQUATS",
+        "difficulty_level": 2,
+        "description": "A Level 2 BACK SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_2",
+            "back_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_3_102",
+        "exercise_name": "HATFIELD SQUATS (BOX & FULL)",
+        "category": "BACK SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 BACK SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "back_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_103",
+        "exercise_name": "BB BACK RACKED BOX SQUATS",
+        "category": "BACK SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 BACK SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "back_squats",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_5_104",
+        "exercise_name": "BB BACK RACKED SQUATS",
+        "category": "BACK SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 BACK SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "back_squats",
+            "level_5",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_105",
+        "exercise_name": "BB BACK RACKED ANDERSON SQUATS",
+        "category": "BACK SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 BACK SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "back_squats",
+            "level_6",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_106",
+        "exercise_name": "BOTTOM HALF BACK SQUATS",
+        "category": "BACK SQUATS",
+        "difficulty_level": 7,
+        "description": "A Level 7 BACK SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "back_squats",
+            "pattern_squat",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_1_107",
+        "exercise_name": "BAND RESISTED LATERAL SQUATS",
+        "category": "LATERAL SQUATS",
+        "difficulty_level": 1,
+        "description": "A Level 1 LATERAL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lateral_squats",
+            "pattern_squat",
+            "fix_knee_valgus",
+            "rnt_correction",
+            "level_1"
+        ]
+    },
+    {
+        "id": "sq_2_108",
+        "exercise_name": "TRX SUPPORTED LATERAL SQUATS",
+        "category": "LATERAL SQUATS",
+        "difficulty_level": 2,
+        "description": "A Level 2 LATERAL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lateral_squats",
+            "pattern_squat",
+            "level_2"
+        ]
+    },
+    {
+        "id": "sq_3_109",
+        "exercise_name": "BW LATERAL SQUATS (SQUAT, MESSIER & SLIDERS)",
+        "category": "LATERAL SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 LATERAL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "lateral_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_110",
+        "exercise_name": "LOADED LATERAL SQUATS (MB, SB, PLATE)",
+        "category": "LATERAL SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 LATERAL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lateral_squats",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_5_111",
+        "exercise_name": "KB & DB LATERAL SQUATS (RACKED - B/L & U/L)",
+        "category": "LATERAL SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 LATERAL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lateral_squats",
+            "level_5",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_112",
+        "exercise_name": "KB & DB LATERAL SQUATS (SUITCASE, CONTRA & IPSI)",
+        "category": "LATERAL SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 LATERAL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lateral_squats",
+            "level_6",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_113",
+        "exercise_name": "LANDMINE LATERAL SQUATS (SQUATS & MESSIER)",
+        "category": "LATERAL SQUATS",
+        "difficulty_level": 7,
+        "description": "A Level 7 LATERAL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "lateral_squats",
+            "pattern_squat",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_8_114",
+        "exercise_name": "ZERCHER HOLD LATERAL SQUATS (PLATE, BB)",
+        "category": "LATERAL SQUATS",
+        "difficulty_level": 8,
+        "description": "A Level 8 LATERAL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_8",
+            "lateral_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_1_115",
+        "exercise_name": "BANDED OH SQUATS",
+        "category": "OH SQUATS",
+        "difficulty_level": 1,
+        "description": "A Level 1 OH SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "oh_squats",
+            "pattern_squat",
+            "fix_knee_valgus",
+            "rnt_correction",
+            "level_1"
+        ]
+    },
+    {
+        "id": "sq_2_116",
+        "exercise_name": "WALL SUPPORTED OH SQUATS",
+        "category": "OH SQUATS",
+        "difficulty_level": 2,
+        "description": "A Level 2 OH SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_2",
+            "oh_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_3_117",
+        "exercise_name": "BW OH SQUATS",
+        "category": "OH SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 OH SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "oh_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_118",
+        "exercise_name": "LOADED OH SQUATS (MB, SB, PLATE)",
+        "category": "OH SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 OH SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "oh_squats",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_5_119",
+        "exercise_name": "KB OH SQUATS (B/L & U/L)",
+        "category": "OH SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 OH SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "oh_squats",
+            "level_5",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_120",
+        "exercise_name": "DB OH SQUATS (B/L & U/L)",
+        "category": "OH SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 OH SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "oh_squats",
+            "level_6",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_121",
+        "exercise_name": "BB OH SQUATS",
+        "category": "OH SQUATS",
+        "difficulty_level": 7,
+        "description": "A Level 7 OH SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "oh_squats",
+            "pattern_squat",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_8_122",
+        "exercise_name": "ANDERSON BB OH SQUATS",
+        "category": "OH SQUATS",
+        "difficulty_level": 8,
+        "description": "A Level 8 OH SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_8",
+            "oh_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_1_123",
+        "exercise_name": "OFFSET RACKED BOX SQUATS",
+        "category": "EARTHQUAKE TRAINING",
+        "difficulty_level": 1,
+        "description": "A Level 1 EARTHQUAKE TRAINING exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "earthquake_training",
+            "level_1",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_2_124",
+        "exercise_name": "OFFSET RACKED DEEP SQUATS",
+        "category": "EARTHQUAKE TRAINING",
+        "difficulty_level": 2,
+        "description": "A Level 2 EARTHQUAKE TRAINING exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "earthquake_training",
+            "pattern_squat",
+            "level_2"
+        ]
+    },
+    {
+        "id": "sq_3_125",
+        "exercise_name": "INVERTED KB OVER HEAD SQUATS (DOUBLE & SA)",
+        "category": "EARTHQUAKE TRAINING",
+        "difficulty_level": 3,
+        "description": "A Level 3 EARTHQUAKE TRAINING exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "earthquake_training",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_4_126",
+        "exercise_name": "INVERTED TRAPBAR OVER SHOULDER SQUATS",
+        "category": "EARTHQUAKE TRAINING",
+        "difficulty_level": 4,
+        "description": "A Level 4 EARTHQUAKE TRAINING exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "earthquake_training",
+            "pattern_squat",
+            "level_4"
+        ]
+    },
+    {
+        "id": "sq_5_127",
+        "exercise_name": "INVERTED TRAP BAR OVER HEAD SQUATS",
+        "category": "EARTHQUAKE TRAINING",
+        "difficulty_level": 5,
+        "description": "A Level 5 EARTHQUAKE TRAINING exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "earthquake_training",
+            "level_5",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_6_128",
+        "exercise_name": "CHAOS LOADED OVER SHOULDER SQUATS",
+        "category": "EARTHQUAKE TRAINING",
+        "difficulty_level": 6,
+        "description": "A Level 6 EARTHQUAKE TRAINING exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "earthquake_training",
+            "level_6",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_129",
+        "exercise_name": "CHAOS LOADED OVER HEAD SQUATS",
+        "category": "EARTHQUAKE TRAINING",
+        "difficulty_level": 7,
+        "description": "A Level 7 EARTHQUAKE TRAINING exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "earthquake_training",
+            "pattern_squat",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_8_130",
+        "exercise_name": "PIZZA PLATE OVER HEAD SQUATS (DOUBLE & SA)",
+        "category": "EARTHQUAKE TRAINING",
+        "difficulty_level": 8,
+        "description": "A Level 8 EARTHQUAKE TRAINING exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_8",
+            "earthquake_training",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_1_131",
+        "exercise_name": "BANDED REVERSE NORDICS (ASSIST & RESIST)",
+        "category": "REVERSE NORDICS",
+        "difficulty_level": 1,
+        "description": "A Level 1 REVERSE NORDICS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "rnt_correction",
+            "fix_knee_valgus",
+            "level_1",
+            "reverse_nordics"
+        ]
+    },
+    {
+        "id": "sq_2_132",
+        "exercise_name": "BOX REVERSE NORDICS",
+        "category": "REVERSE NORDICS",
+        "difficulty_level": 2,
+        "description": "A Level 2 REVERSE NORDICS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_2",
+            "reverse_nordics"
+        ]
+    },
+    {
+        "id": "sq_3_133",
+        "exercise_name": "LOADED REVERSE NORDICS (MB, SB, PLATE)",
+        "category": "REVERSE NORDICS",
+        "difficulty_level": 3,
+        "description": "A Level 3 REVERSE NORDICS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "reverse_nordics"
+        ]
+    },
+    {
+        "id": "sq_4_134",
+        "exercise_name": "LANDMINE REVERSE NORDICS",
+        "category": "REVERSE NORDICS",
+        "difficulty_level": 4,
+        "description": "A Level 4 REVERSE NORDICS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_4",
+            "reverse_nordics"
+        ]
+    },
+    {
+        "id": "sq_1_135",
+        "exercise_name": "BANDED SL SQUATS (ASSISTED & RESISTED)",
+        "category": "PISTOL SQUATS",
+        "difficulty_level": 1,
+        "description": "A Level 1 PISTOL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "fix_knee_valgus",
+            "pattern_squat",
+            "rnt_correction",
+            "level_1",
+            "pistol_squats"
+        ]
+    },
+    {
+        "id": "sq_2_136",
+        "exercise_name": "TRX SUPPORTED SL SQUATS",
+        "category": "PISTOL SQUATS",
+        "difficulty_level": 2,
+        "description": "A Level 2 PISTOL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_2",
+            "pattern_squat",
+            "pistol_squats"
+        ]
+    },
+    {
+        "id": "sq_3_137",
+        "exercise_name": "WALL SUPPORTED SL SQUATS",
+        "category": "PISTOL SQUATS",
+        "difficulty_level": 3,
+        "description": "A Level 3 PISTOL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_3",
+            "pattern_squat",
+            "pistol_squats"
+        ]
+    },
+    {
+        "id": "sq_4_138",
+        "exercise_name": "STABILITY BALL WALL SUPPORTED SL SQUATS",
+        "category": "PISTOL SQUATS",
+        "difficulty_level": 4,
+        "description": "A Level 4 PISTOL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_4",
+            "pattern_squat",
+            "pistol_squats"
+        ]
+    },
+    {
+        "id": "sq_5_139",
+        "exercise_name": "SL BOX SQUATS",
+        "category": "PISTOL SQUATS",
+        "difficulty_level": 5,
+        "description": "A Level 5 PISTOL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_5",
+            "pattern_squat",
+            "pistol_squats"
+        ]
+    },
+    {
+        "id": "sq_6_140",
+        "exercise_name": "HIGH BOX ECC SL SQUATS",
+        "category": "PISTOL SQUATS",
+        "difficulty_level": 6,
+        "description": "A Level 6 PISTOL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_6",
+            "pistol_squats",
+            "pattern_squat"
+        ]
+    },
+    {
+        "id": "sq_7_141",
+        "exercise_name": "SKATERS & SHRIMP SQUATS",
+        "category": "PISTOL SQUATS",
+        "difficulty_level": 7,
+        "description": "A Level 7 PISTOL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "pattern_squat",
+            "pistol_squats",
+            "level_7"
+        ]
+    },
+    {
+        "id": "sq_8_142",
+        "exercise_name": "LOADED SL SQUATS (KB, DB, MB, PLATE, SB, LM, SM)",
+        "category": "PISTOL SQUATS",
+        "difficulty_level": 8,
+        "description": "A Level 8 PISTOL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_8",
+            "pattern_squat",
+            "pistol_squats"
+        ]
+    },
+    {
+        "id": "sq_9_143",
+        "exercise_name": "DRAGON SQUATS",
+        "category": "PISTOL SQUATS",
+        "difficulty_level": 9,
+        "description": "A Level 9 PISTOL SQUATS exercise. Targeting specific movement patterns and corrective strategies.",
+        "description_source": "Auto",
+        "tags": [
+            "level_9",
+            "pattern_squat",
+            "pistol_squats"
+        ]
+    }
+]
