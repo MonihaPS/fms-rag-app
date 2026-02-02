@@ -133,13 +133,14 @@ squat_rag_correctness = GEval(
         "Only squat exercises used?",
         "No hallucinated names?"
     ],
-    test_case_params=[LLMTestCaseParams.ACTUAL_OUTPUT, LLMTestCaseParams.EXPECTED_OUTPUT],
+    evaluation_params=[LLMTestCaseParams.INPUT, LLMTestCaseParams.ACTUAL_OUTPUT],
     model="gpt-4o-mini",
-    strictness=2
+    strictness=2,
+    async_mode=False
 )
 
-relevancy = AnswerRelevancyMetric(threshold=0.7)
-faithfulness = FaithfulnessMetric(threshold=0.75)
+relevancy = AnswerRelevancyMetric(threshold=0.9)
+faithfulness = FaithfulnessMetric(threshold=0.9)
 
 # ────────────────────────────────────────────────
 # MAIN - Batch processing
