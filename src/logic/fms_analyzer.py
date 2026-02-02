@@ -1,4 +1,4 @@
-# fms_analyzer.py: Further refined with full book criteria - added gender consideration for TSP (assume male if not specified), added clearing test notes in reason if applicable, more precise mappings.
+# fms_analyzer.py: Refined with Inline Lunge, Shoulder Mobility, ASLR, TSP, Rotary Stability criteria from book images - added gender for TSP (assume male), pain = 0 + referral reason.
 
 def analyze_fms_profile(profile, use_manual_scores=False):
     """
@@ -20,27 +20,27 @@ def analyze_fms_profile(profile, use_manual_scores=False):
         if pain_data.get('pain_reported', 0) > 0:
             return 0
 
-        # 3. Test-specific logic from the book
+        # 3. Test-specific logic from PDF
         if test_name == 'overhead_squat':
             feet = sub_data.get('feet', {})
             trunk = sub_data.get('trunk_torso', {})
             lower = sub_data.get('lower_limb', {})
             upper = sub_data.get('upper_body_bar_position', {})
             
-            # Score 1: Tibia/torso not parallel, femur not below horizontal, knees not over feet, lumbar flexion
-            if (trunk.get('upright_torso', 0) < 2 or  # Not parallel to tibia
-                trunk.get('excessive_forward_lean', 0) > 1 or
+            # Check for score 1 conditions (any present → 1)
+            if (trunk.get('upright_torso', 0) < 2 or  # Not parallel (assume low severity means parallel)
+                trunk.get('excessive_forward_lean', 0) > 1 or 
                 trunk.get('lumbar_flexion', 0) > 1 or
-                lower.get('knees_track_over_toes', 0) < 2 or  # Not over feet
-                feet.get('heels_stay_down', 0) < 2 or  # Femur not below horizontal implied
-                upper.get('bar_aligned_over_mid_foot', 0) < 2):  # Dowel not over feet
+                lower.get('knees_track_over_toes', 0) < 2 or  # Not aligned
+                feet.get('heels_stay_down', 0) < 2 or  # Femur not below horizontal implied by heels
+                upper.get('bar_aligned_over_mid_foot', 0) < 2):  # Dowel not aligned
                 return 1
             
-            # Score 2: Heels elevated, but rest OK
+            # Check for score 2 (heels elevated but others ok)
             if feet.get('heels_lift', 0) > 0:
                 return 2
             
-            # Score 3: All perfect
+            # All good → 3
             return 3
 
         elif test_name == 'hurdle_step':
@@ -52,14 +52,14 @@ def analyze_fms_profile(profile, use_manual_scores=False):
             if stepping.get('toe_drag', 0) > 0 or pelvis.get('loss_of_balance', 0) > 0:
                 return 1
             
-            # Score 2: Alignment lost between hips/knees/ankles, lumbar movement, dowel/hurdle not parallel
-            if (stance.get('knee_stable', 0) < 2 or  # Alignment lost
-                stance.get('knee_valgus', 0) > 1 or
-                stance.get('knee_varus', 0) > 1 or
-                pelvis.get('excessive_rotation', 0) > 1):  # Lumbar movement
+            # Score 2: Alignment lost, movement in lumbar, dowel/hurdle not parallel
+            if (pelvis.get('excessive_rotation', 0) > 0 or  # Movement in lumbar
+                stance.get('knee_stable', 0) < 2 or  # Alignment lost
+                stance.get('knee_valgus', 0) > 0 or
+                stance.get('knee_varus', 0) > 0):
                 return 2
             
-            # Score 3: All aligned, minimal/no lumbar, parallel
+            # All aligned, minimal movement → 3
             return 3
 
         elif test_name == 'inline_lunge':
@@ -71,14 +71,14 @@ def analyze_fms_profile(profile, use_manual_scores=False):
             if balance.get('loss_of_balance', 0) > 0:
                 return 1
             
-            # Score 2: Dowel contacts not maintained, dowel not vertical, torso movement, not in sagittal, knee not touch
-            if (alignment.get('trunk_upright', 0) < 2 or  # Contacts not maintained
-                alignment.get('excessive_forward_lean', 0) > 1 or  # Torso movement
-                alignment.get('lateral_shift', 0) > 1 or  # Not sagittal
-                lower.get('knee_tracks_over_foot', 0) < 2):  # Knee not touch
+            # Score 2: Dowel not vertical/contacts not maintained, movement in torso, not in sagittal, knee not touch
+            if (alignment.get('excessive_forward_lean', 0) > 0 or  # Movement in torso
+                alignment.get('lateral_shift', 0) > 0 or  # Not in sagittal
+                lower.get('knee_tracks_over_foot', 0) < 2 or  # Knee not touch implied
+                lower.get('heel_lift', 0) > 0):
                 return 2
             
-            # Score 3: All perfect
+            # All good → 3
             return 3
 
         elif test_name == 'shoulder_mobility':
@@ -88,7 +88,7 @@ def analyze_fms_profile(profile, use_manual_scores=False):
             if reach.get('hands_within_fist_distance', 0) > 0:
                 return 3
             
-            # Score 2: Within one and a half hand lengths
+            # Score 2: Within 1.5 hand lengths
             if reach.get('hands_within_hand_length', 0) > 0:
                 return 2
             
@@ -99,32 +99,32 @@ def analyze_fms_profile(profile, use_manual_scores=False):
             moving = sub_data.get('moving_leg', {})
             non_moving = sub_data.get('non_moving_leg', {})
             
-            # Non-moving not neutral → 1
-            if non_moving.get('remains_flat', 0) < 2:
+            # Assume non-moving neutral unless faults
+            if non_moving.get('remains_flat', 0) < 2:  # Not neutral if not flat
                 return 1
             
-            # Score 3: Malleolus between mid-thigh and ASIS
+            # Score 3: > mid-thigh to ASIS (gt_80)
             if moving.get('gt_80_hip_flexion', 0) > 0:
                 return 3
             
-            # Score 2: Between mid-thigh and joint line
+            # Score 2: mid-thigh to joint line (60-80)
             if moving.get('between_60_80_hip_flexion', 0) > 0:
                 return 2
             
-            # Score 1: Below joint line
+            # Score 1: below joint line
             return 1
 
         elif test_name == 'trunk_stability_pushup':
             core = sub_data.get('core_control', {})
             body = sub_data.get('body_alignment', {})
+            upper = sub_data.get('upper_body', {})
             
-            # Score 1: Unable to perform (lag or sagging)
+            # Score 1: Unable (lag or sagging)
             if core.get('hips_lag', 0) > 0 or body.get('sagging_hips', 0) > 0:
                 return 1
             
-            # Assume male for 3 (thumbs at head); if female or minor issues, 2 (thumbs at chin/clavicle)
-            # Note: Data model doesn't have gender, so assume 3 if no faults, 2 if minor extension
-            if core.get('excessive_lumbar_extension', 0) > 0:
+            # Note: 3 vs 2 depends on thumb position (not in data), assume 3 if no faults, 2 if minor upper issues
+            if upper.get('uneven_arm_push', 0) > 0 or upper.get('shoulder_instability', 0) > 0:
                 return 2
             
             return 3
@@ -136,27 +136,29 @@ def analyze_fms_profile(profile, use_manual_scores=False):
             if diagonal.get('unable_to_complete', 0) > 0:
                 return 1
             
-            # Score 2: Correct diagonal repetition
+            # Score 2: Can do diagonal (assume if smooth but some loss)
             if diagonal.get('smooth_controlled', 0) > 0 and diagonal.get('loss_of_balance', 0) <= 1:
                 return 2
             
-            # Score 3: Correct unilateral repetition
+            # Score 3: Correct unilateral (if no loss and smooth)
             if diagonal.get('smooth_controlled', 0) > 1 and diagonal.get('loss_of_balance', 0) == 0:
                 return 3
             
-            return 1
+            return 1  # Default to 1 if unclear
         
-        # Default
+        # Default for any missed test
         return 3
 
     # --- 2. EXECUTE SCORING ---
     effective_scores = {}
     
     for test_name in profile:
-        if test_name in ['use_manual_scores']: continue
+        if test_name in ['use_manual_scores']: continue # Skip flag
         
         test_data = profile[test_name]
         
+        # Check if sub-data exists (did the user expand and check boxes?)
+        # We check this by seeing if any value in the nested dicts is > 0
         has_sub_inputs = False
         for k, v in test_data.items():
             if isinstance(v, dict):
@@ -165,30 +167,33 @@ def analyze_fms_profile(profile, use_manual_scores=False):
                     break
         
         if use_manual_scores:
+            # Coach override: Always use manual score
             effective_scores[test_name] = test_data.get('score', 2)
         elif has_sub_inputs:
+            # AUTOMATIC MODE: Calculate based on checkboxes
             effective_scores[test_name] = calculate_score_from_faults(test_name, test_data)
         else:
+            # No override, no sub-inputs: Use manual score
             effective_scores[test_name] = test_data.get('score', 2)
 
-    # --- 3. TRAFFIC LIGHT LOGIC ---
+    # --- 3. TRAFFIC LIGHT LOGIC (Unchanged) ---
+    # Now we use 'effective_scores' which contains the computed values
+   
     # RED LIGHT
     if effective_scores.get('active_straight_leg_raise', 3) <= 1 or \
        effective_scores.get('shoulder_mobility', 3) <= 1:
         return {"status": "MOBILITY", "target_level": 1, "reason": "Mobility Restriction (Score 1 in ASLR or SM)", "effective_scores": effective_scores}
-
     # YELLOW LIGHT
     if effective_scores.get('rotary_stability', 3) <= 1 or \
        effective_scores.get('trunk_stability_pushup', 3) <= 1:
         return {"status": "STABILITY", "target_level": 3, "reason": "Motor Control Failure (Score 1 in TS or RS)", "effective_scores": effective_scores}
-
     # GREEN LIGHT
     min_pattern = min(
-        effective_scores.get('hurdle_step', 3), 
-        effective_scores.get('inline_lunge', 3), 
+        effective_scores.get('hurdle_step', 3),
+        effective_scores.get('inline_lunge', 3),
         effective_scores.get('overhead_squat', 3)
     )
-    
+   
     if min_pattern <= 1:
         return {"status": "PATTERN", "target_level": 5, "reason": "Pattern Dysfunction (Score 1 in Squat/Hurdle/Lunge)", "effective_scores": effective_scores}
     elif min_pattern == 2:

@@ -1,61 +1,31 @@
-# main.py: Modified for Render.com - use os.getenv('PORT'), Neon DB connection, ready for Confident AI (add CONFIDENT_API_KEY if needed for tests).
-
 import json
 import hashlib
+import uvicorn
+import os
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-import uvicorn
 from typing import List, Dict, Any
-from datetime import datetime
-import os
 
-# ── Database ──
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from sqlalchemy import Column, Integer, JSON, DateTime
-from pydantic_settings import BaseSettings
-
-# ── Core modules ──
+# ── IMPORTS FROM YOUR SRC ──
 from src.logic.fms_analyzer import analyze_fms_profile
 from src.rag.retriever import get_exercises_by_profile
 from src.rag.generator import generate_workout_plan
+# Import Database tools instead of redefining them
+from src.database import init_db, AsyncSessionLocal, FMSResult
 
 # ────────────────────────────────────────────────
-# Settings
+# Lifecycle (Startup)
 # ────────────────────────────────────────────────
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("🚀 Starting up: Connecting to NeonDB...")
+    await init_db()  # Create tables if they don't exist
+    print("✅ Neon DB Connection Verified.")
+    yield
 
-class Settings(BaseSettings):
-    DATABASE_URL: str
-
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-
-settings = Settings()
-
-engine = create_async_engine(settings.DATABASE_URL, echo=True)
-AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
-
-class Base(DeclarativeBase):
-    pass
-
-class FMSResult(Base):
-    __tablename__ = "fms_results"
-
-    id = Column(Integer, primary_key=True, index=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    input_profile = Column(JSON, nullable=False)
-    effective_scores = Column(JSON, nullable=True)
-    analysis = Column(JSON, nullable=True)
-    exercises = Column(JSON, nullable=True)
-    final_plan = Column(JSON, nullable=True)
-
-# ────────────────────────────────────────────────
-# FastAPI App
-# ────────────────────────────────────────────────
-
-app = FastAPI(title="FMS Smart Coach API", version="3.2")
+app = FastAPI(title="FMS Smart Coach API", version="3.3", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -66,12 +36,6 @@ app.add_middleware(
 )
 
 RESPONSE_CACHE = {}
-
-@app.on_event("startup")
-async def startup_event():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    print("Neon DB tables created/verified.")
 
 # ────────────────────────────────────────────────
 # Pydantic Models
@@ -255,15 +219,11 @@ class FMSProfileRequest(BaseModel):
     rotary_stability: RSData
     use_manual_scores: bool = False
 
-# ────────────────────────────────────────────────
-# Main Endpoint
-# ────────────────────────────────────────────────
-
 @app.post("/generate-workout")
 async def generate_workout(profile: FMSProfileRequest):
     full_data = profile.dict()
 
-    # Create simplified dictionary for retriever
+    # Create simplified dictionary
     simple_scores = {
         "overhead_squat": full_data["overhead_squat"]["score"],
         "hurdle_step": full_data["hurdle_step"]["score"],
@@ -274,7 +234,7 @@ async def generate_workout(profile: FMSProfileRequest):
         "rotary_stability": full_data["rotary_stability"]["score"],
     }
 
-    # Cache mechanism
+    # Cache
     cache_key = hashlib.md5(json.dumps(full_data, sort_keys=True).encode()).hexdigest()
     if cache_key in RESPONSE_CACHE:
         return RESPONSE_CACHE[cache_key]
@@ -282,7 +242,6 @@ async def generate_workout(profile: FMSProfileRequest):
     # 1. ANALYZE
     try:
         analysis = analyze_fms_profile(full_data, use_manual_scores=full_data.get('use_manual_scores', False))
-        print(f"DEBUG: Analysis result: {analysis}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Analyzer Error: {str(e)}")
 
@@ -294,9 +253,10 @@ async def generate_workout(profile: FMSProfileRequest):
             "difficulty_color": "Red"
         }
 
-    # 2. RETRIEVE
+    # 2. RETRIEVE (ASYNC UPDATE)
     try:
-        retrieval_result = get_exercises_by_profile(
+        # Changed to await because retriever now talks to DB
+        retrieval_result = await get_exercises_by_profile(
             simple_scores=simple_scores,
             detailed_faults=full_data
         )
@@ -318,25 +278,24 @@ async def generate_workout(profile: FMSProfileRequest):
         final_plan["effective_scores"] = analysis.get("effective_scores", {})
 
         # ── SAVE TO NEON DATABASE ──
+        # Uses the FMSResult imported from src.database
         async with AsyncSessionLocal() as session:
             new_result = FMSResult(
                 input_profile=full_data,
                 effective_scores=final_plan.get("effective_scores"),
-                analysis=analysis,
-                exercises=exercises,
-                final_plan=final_plan
+                analysis_summary=analysis, # Note: Changed to match src.database name
+                final_plan_output=final_plan # Note: Changed to match src.database name
             )
             session.add(new_result)
             await session.commit()
-            await session.refresh(new_result)
-            print(f"DEBUG: Saved FMS result to Neon DB with ID: {new_result.id}")
+            print(f"DEBUG: Saved FMS result to Neon DB.")
 
         RESPONSE_CACHE[cache_key] = final_plan
         return final_plan
 
     except Exception as e:
-        print(f"ERROR during generation or DB save: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Generator or DB Error: {str(e)}")
+        print(f"ERROR: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"System Error: {str(e)}")
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))

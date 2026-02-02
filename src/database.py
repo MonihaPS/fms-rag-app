@@ -1,40 +1,51 @@
-# src/database.py
+import os
+from dotenv import load_dotenv
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from sqlalchemy import Column, Integer, String, JSON, DateTime
+from sqlalchemy import Column, Integer, String, JSON, ARRAY, DateTime
 from datetime import datetime
-import os
-from pydantic_settings import BaseSettings
 
-class Settings(BaseSettings):
-    DATABASE_URL: str
+load_dotenv()
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+# 1. Get URL from .env
+DATABASE_URL = os.getenv("DATABASE_URL").replace("?sslmode=require", "")
 
-settings = Settings()
+# Fix for NeonDB connection string format
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+asyncpg://", 1)
 
-engine = create_async_engine(settings.DATABASE_URL, echo=True)  # echo=True for debug logs
+# 2. Create Database Engine
+engine = create_async_engine(DATABASE_URL, echo=False)
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 class Base(DeclarativeBase):
     pass
 
-# Example table (adjust columns as needed)
+# --- TABLE 1: EXERCISES (Your Knowledge Base) ---
+class Exercise(Base):
+    __tablename__ = "exercises"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    difficulty_level = Column(Integer)
+    tags = Column(ARRAY(String)) 
+    description = Column(String, nullable=True)
+    benefits = Column(String, nullable=True)
+    setup = Column(String, nullable=True)
+    execution = Column(String, nullable=True)
+    meta_data = Column(JSON, nullable=True)
+
+# --- TABLE 2: RESULTS (History Log) ---
 class FMSResult(Base):
     __tablename__ = "fms_results"
 
     id = Column(Integer, primary_key=True, index=True)
     created_at = Column(DateTime, default=datetime.utcnow)
-    input_profile = Column(JSON, nullable=False)          # full input JSON
-    effective_scores = Column(JSON, nullable=True)
-    analysis = Column(JSON, nullable=True)
-    exercises = Column(JSON, nullable=True)
-    final_plan = Column(JSON, nullable=True)             # full output
+    input_profile = Column(JSON)
+    effective_scores = Column(JSON)
+    analysis_summary = Column(JSON)
+    final_plan_output = Column(JSON)
 
 async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-
-# Call this once on startup (see main.py below)
