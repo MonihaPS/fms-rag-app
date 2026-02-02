@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select # <--- ADDED THIS
 from typing import Dict, Any, Optional
 
 # ── IMPORTS ──
@@ -14,7 +15,8 @@ from src.rag.retriever import get_exercises_by_profile
 from src.rag.generator import generate_workout_plan
 
 # Import the NEW database models
-from src.database import AsyncSessionLocal, AssessmentInput, AssessmentScore, engine, Base
+# ensure User is imported here
+from src.database import AsyncSessionLocal, AssessmentInput, AssessmentScore, User, engine, Base
 
 # ────────────────────────────────────────────────
 # Lifecycle (Startup)
@@ -22,7 +24,6 @@ from src.database import AsyncSessionLocal, AssessmentInput, AssessmentScore, en
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("🚀 Starting up: Connecting to NeonDB...")
-    # Ensure tables exist (Safe to run; won't delete data, only creates missing tables)
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     print("✅ Neon DB Connection Verified & Tables Ready.")
@@ -244,59 +245,72 @@ class FMSProfileRequest(BaseModel):
 # API Endpoints
 # ────────────────────────────────────────────────
 
-# Database Dependency
 async def get_db():
     async with AsyncSessionLocal() as session:
         yield session
 
-@app.post("/submit-assessment")
-async def submit_assessment(
+@app.post("/generate-workout")
+async def generate_workout(
     profile: FMSProfileRequest, 
     db: AsyncSession = Depends(get_db)
 ):
     """
-    1. Receives Sub-Inputs (nested JSON).
-    2. Calculates Final Scores via Analyzer.
-    3. Saves Raw Inputs -> Table 1 (assessment_inputs).
-    4. Saves Main Scores -> Table 2 (assessment_scores).
-    5. Generates Workout Plan.
+    1. Check if User 1 exists (Create if not).
+    2. Receives Sub-Inputs (nested JSON).
+    3. Calculates Final Scores via Analyzer.
+    4. Saves Raw Inputs -> Table 1.
+    5. Saves Main Scores -> Table 2.
+    6. Generates Workout Plan.
     """
     
-    # Convert Pydantic model to pure dictionary for JSON storage
     full_data = profile.dict()
+
+    # ─────────────────────────────────────────────────
+    # 0. ENSURE USER EXISTS (FIX FOR YOUR ERROR)
+    # ─────────────────────────────────────────────────
+    try:
+        # Check if user 1 exists
+        result = await db.execute(select(User).where(User.id == 1))
+        user = result.scalars().first()
+        
+        if not user:
+            print("⚠️ User 1 not found. Creating test user...")
+            new_user = User(id=1, username="test_athlete", email="test@example.com")
+            db.add(new_user)
+            await db.commit() # Commit so the user is available for the Foreign Key
+    except Exception as e:
+        print(f"User Creation Error: {e}")
+        # Proceeding anyway just in case it was a race condition
 
     # ─────────────────────────────────────────────────
     # 1. ANALYZE (Calculate Scores)
     # ─────────────────────────────────────────────────
     try:
-        # The analyzer reads the sub-inputs and returns specific scores
         analysis = analyze_fms_profile(full_data, use_manual_scores=full_data.get('use_manual_scores', False))
     except Exception as e:
         print(f"Analyzer Error: {e}")
         raise HTTPException(status_code=500, detail=f"Analyzer Error: {str(e)}")
 
-    # Extract the calculated scores
     effective_scores = analysis.get("effective_scores", {})
     total_score = analysis.get("total_score", 0)
 
     # ─────────────────────────────────────────────────
     # 2. SAVE TO DATABASE (Multi-Table)
     # ─────────────────────────────────────────────────
-    # 
     try:
+        # 
+
         # A. TABLE 1: RAW SUB-INPUTS
-        # Stores the massive nested dictionary exactly as the user sent it
         input_entry = AssessmentInput(
-            user_id=1,  # Hardcoded for now, implement Auth later
+            user_id=1,  # Now safe because we created User 1 above
             raw_json_data=full_data
         )
         db.add(input_entry)
-        await db.flush()  # Generates input_entry.id without commiting yet
+        await db.flush() 
 
         # B. TABLE 2: MAIN SCORES
-        # Stores the clean 0-3 integers, linked to the raw inputs
         score_entry = AssessmentScore(
-            input_id=input_entry.id, # LINKING HERE
+            input_id=input_entry.id, 
             overhead_squat=effective_scores.get('overhead_squat', 0),
             hurdle_step=effective_scores.get('hurdle_step', 0),
             inline_lunge=effective_scores.get('inline_lunge', 0),
@@ -314,13 +328,11 @@ async def submit_assessment(
     except Exception as e:
         await db.rollback()
         print(f"❌ Database Error: {str(e)}")
-        # Continue to generate workout even if DB fails, but log it
+        # We allow the flow to continue so you still get your workout response
 
     # ─────────────────────────────────────────────────
     # 3. RETRIEVE & GENERATE WORKOUT
     # ─────────────────────────────────────────────────
-    
-    # Handle Stop Logic
     if analysis.get("status") == "STOP":
         return {
             "session_title": "Medical Referral Required",
@@ -330,18 +342,15 @@ async def submit_assessment(
         }
 
     try:
-        # Get exercises from JSON/DB Knowledge Base
         retrieval_result = await get_exercises_by_profile(
             simple_scores=effective_scores,
             detailed_faults=full_data
         )
         exercises = retrieval_result.get("data", [])
         
-        # Generate the Plan via LLM
         final_plan = generate_workout_plan(analysis, exercises)
         
-        # Add metadata to response
-        final_plan["assessment_id"] = input_entry.id
+        final_plan["assessment_id"] = input_entry.id if 'input_entry' in locals() else None
         final_plan["calculated_scores"] = effective_scores
 
         return final_plan
