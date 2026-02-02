@@ -21,22 +21,12 @@ engine = create_async_engine(DATABASE_URL, echo=False)
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 Base = declarative_base()
 
-# --- MODELS ---
-
-class User(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, index=True)
-    email = Column(String, unique=True, index=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-
 # TABLE 1: RAW SUB-INPUTS
 # This table strictly stores "What the user entered"
 class AssessmentInput(Base):
     __tablename__ = "assessment_inputs"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Stores the full nested dictionary of checkboxes (e.g., {"overhead_squat": {"heels_lift": true...}})
@@ -66,6 +56,7 @@ class AssessmentScore(Base):
     rotary_stability = Column(Integer)
     
     total_score = Column(Integer)
+    generated_workout = Column(JSON, nullable=True)
 
     # Relationship
     input_data = relationship("AssessmentInput", back_populates="scores")

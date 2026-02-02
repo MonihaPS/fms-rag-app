@@ -256,15 +256,6 @@ async def generate_workout(
 ):
     full_data = profile.dict()
 
-    # 0. Ensure test user exists
-    try:
-        result = await db.execute(select(User).where(User.id == 1))
-        if not result.scalars().first():
-            db.add(User(id=1, username="test_athlete", email="test@example.com"))
-            await db.commit()
-    except Exception as e:
-        print(f"User check warning: {e}")
-
     # ─────────────────────────────────────────────────
     # 1. Analyze FMS profile
     # ─────────────────────────────────────────────────
@@ -324,7 +315,7 @@ async def generate_workout(
         # 4. Save to database (non-blocking)
         # ─────────────────────────────────────────────────
         try:
-            input_entry = AssessmentInput(user_id=1, raw_json_data=full_data)
+            input_entry = AssessmentInput(raw_json_data=full_data)
             db.add(input_entry)
             await db.flush()
 
@@ -337,7 +328,8 @@ async def generate_workout(
                 active_straight_leg_raise=effective_scores.get('active_straight_leg_raise', 0),
                 trunk_stability_pushup=effective_scores.get('trunk_stability_pushup', 0),
                 rotary_stability=effective_scores.get('rotary_stability', 0),
-                total_score=analysis.get("total_score", 0)
+                total_score=analysis.get("total_score", 0),
+                generated_workout=final_plan
             )
             db.add(score_entry)
             await db.commit()
