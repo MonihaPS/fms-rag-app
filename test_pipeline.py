@@ -135,7 +135,6 @@ squat_rag_correctness = GEval(
     ],
     evaluation_params=[LLMTestCaseParams.INPUT, LLMTestCaseParams.ACTUAL_OUTPUT],
     model="gpt-4o-mini",
-    strictness=2,
     async_mode=False
 )
 
