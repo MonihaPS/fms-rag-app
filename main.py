@@ -13,7 +13,7 @@ from typing import Dict, Any
 from src.logic.fms_analyzer import analyze_fms_profile
 from src.rag.retriever import get_exercises_by_profile
 from src.rag.generator import generate_workout_plan
-from src.database import AsyncSessionLocal, AssessmentInput, AssessmentScore, User, engine, Base
+from src.database import AsyncSessionLocal, AssessmentInput, AssessmentScore, engine, Base
 
 # ────────────────────────────────────────────────
 # Lifecycle (Startup)
