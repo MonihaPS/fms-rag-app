@@ -273,7 +273,7 @@ if submit_btn:
     # 2. Call API
     with st.spinner("🤖 AI Coach is analyzing faults and querying NeonDB..."):
         try:
-            response = requests.post(API_URL, json=payload, timeout=20)
+            response = requests.post(API_URL, json=payload, timeout=120)
             
             if response.status_code == 200:
                 data = response.json()

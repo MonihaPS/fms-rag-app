@@ -1,11 +1,12 @@
+import json
+import os
 from typing import Dict, Any, List, Optional
-from sqlalchemy import select
 from src.logic.fms_analyzer import analyze_fms_profile
-from src.database import AsyncSessionLocal, Exercise
-import asyncio
 
 # --- CONFIGURATION ---
-# FAULT_TO_TAG_MAP remains exactly the same as your version
+# Path to your ingested JSON file
+JSON_KB_PATH = 'data/processed/exercise_knowledge_base.json'
+
 FAULT_TO_TAG_MAP = {
     "heels_lift": "fix_heels_lift",
     "knee_valgus": "fix_knee_valgus",
@@ -58,28 +59,21 @@ FAULT_TO_TAG_MAP = {
     "right_side_deficit": "pattern_squat"
 }
 
-async def fetch_exercises_from_db():
-    """Fetch all exercises from NeonDB"""
+def fetch_exercises_from_json():
+    """Fetch all exercises from the local JSON Knowledge Base"""
+    print(f"--- DEBUG: Loading exercises from {JSON_KB_PATH}... ---")
+    
+    if not os.path.exists(JSON_KB_PATH):
+        print(f"❌ ERROR: JSON file not found at {JSON_KB_PATH}")
+        return []
+        
     try:
-        async with AsyncSessionLocal() as session:
-            print("--- DEBUG: Connecting to NeonDB to fetch exercises... ---")
-            result = await session.execute(select(Exercise))
-            exercises = result.scalars().all()
-            
-            # Convert SQLAlchemy objects to Dictionary format
-            data = []
-            for ex in exercises:
-                data.append({
-                    "name": ex.name,
-                    "difficulty_level": ex.difficulty_level,
-                    "tags": ex.tags if ex.tags else [],
-                    "description": ex.description,
-                    "coach_tip": ex.meta_data.get("coach_tip", "") if ex.meta_data else ""
-                })
-            print(f"✅ SUCCESS: Loaded {len(data)} exercises from NeonDB.")
+        with open(JSON_KB_PATH, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            print(f"✅ SUCCESS: Loaded {len(data)} exercises from JSON.")
             return data
     except Exception as e:
-        print(f"❌ ERROR loading from DB: {e}")
+        print(f"❌ ERROR reading JSON: {e}")
         return []
 
 async def get_exercises_by_profile(
@@ -96,11 +90,11 @@ async def get_exercises_by_profile(
     target_level = analysis.get('target_level', 1)
     print(f"--- DEBUG: Target Level is {target_level} ---")
 
-    # 2. Load Data (FROM DB NOW)
-    kb = await fetch_exercises_from_db()
+    # 2. Load Data (FROM JSON NOW)
+    kb = fetch_exercises_from_json()
     
     if not kb:
-        return {"status": "ERROR_NO_DB", "analysis": analysis, "data": []}
+        return {"status": "ERROR_NO_DATA", "analysis": analysis, "data": []}
 
     # 3. Build Search Tags
     search_tags = set()
@@ -127,24 +121,30 @@ async def get_exercises_by_profile(
     # 4. Filter
     scored_exercises = []
     for ex in kb:
-        ex_tags = [str(t).lower() for t in ex['tags']]
+        ex_tags = [str(t).lower() for t in ex.get('tags', [])]
         ex_level = ex.get('difficulty_level', 1)
         
+        # Strict Level Matching (Only show exercises for the calculated Target Level)
         if ex_level == target_level:
             match_count = sum(1 for t in search_tags if t.lower() in ex_tags)
+            
+            # Boost score if it matches a specific corrective tag (starts with 'fix_')
             if match_count > 0:
                 if any("fix" in t for t in search_tags if t.lower() in ex_tags):
                     match_count += 5
                 scored_exercises.append({"ex": ex, "score": match_count})
 
-    # 5. Sort
+    # 5. Sort by relevance score
     scored_exercises.sort(key=lambda x: x['score'], reverse=True)
     top_exercises = [x['ex'] for x in scored_exercises[:3]]
 
-    # Fallback
+    # Fallback: If no specific match, just get general exercises for that level
     if not top_exercises:
-        print("--- DEBUG: No matches found. Using Fallback logic. ---")
-        fallback = [ex for ex in kb if ex.get('difficulty_level') == target_level and 'pattern_squat' in [t.lower() for t in ex.get('tags', [])]]
+        print("--- DEBUG: No specific matches found. Using General Level Fallback. ---")
+        fallback = [
+            ex for ex in kb 
+            if ex.get('difficulty_level') == target_level 
+        ]
         top_exercises = fallback[:3]
 
     return {
