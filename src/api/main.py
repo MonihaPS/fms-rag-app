@@ -1,4 +1,5 @@
-# main.py
+# main.py: Modified for Render.com - use os.getenv('PORT'), Neon DB connection, ready for Confident AI (add CONFIDENT_API_KEY if needed for tests).
+
 import json
 import hashlib
 from fastapi import FastAPI, HTTPException
@@ -7,12 +8,12 @@ from pydantic import BaseModel, Field
 import uvicorn
 from typing import List, Dict, Any
 from datetime import datetime
+import os
 
-# ── Database imports ──
+# ── Database ──
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 from sqlalchemy import Column, Integer, JSON, DateTime
-import os
 from pydantic_settings import BaseSettings
 
 # ── Core modules ──
@@ -21,7 +22,7 @@ from src.rag.retriever import get_exercises_by_profile
 from src.rag.generator import generate_workout_plan
 
 # ────────────────────────────────────────────────
-# Database Configuration
+# Settings
 # ────────────────────────────────────────────────
 
 class Settings(BaseSettings):
@@ -33,7 +34,7 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-engine = create_async_engine(settings.DATABASE_URL, echo=True)  # echo=True for SQL debug logs
+engine = create_async_engine(settings.DATABASE_URL, echo=True)
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 class Base(DeclarativeBase):
@@ -66,18 +67,14 @@ app.add_middleware(
 
 RESPONSE_CACHE = {}
 
-# ────────────────────────────────────────────────
-# Startup: Create tables if not exist
-# ────────────────────────────────────────────────
-
 @app.on_event("startup")
 async def startup_event():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-    print("Database tables created/verified.")
+    print("Neon DB tables created/verified.")
 
 # ────────────────────────────────────────────────
-# Pydantic Models (your full models here)
+# Pydantic Models
 # ────────────────────────────────────────────────
 
 class OS_TrunkTorso(BaseModel):
@@ -259,7 +256,7 @@ class FMSProfileRequest(BaseModel):
     use_manual_scores: bool = False
 
 # ────────────────────────────────────────────────
-# Endpoint
+# Main Endpoint
 # ────────────────────────────────────────────────
 
 @app.post("/generate-workout")
@@ -320,7 +317,7 @@ async def generate_workout(profile: FMSProfileRequest):
 
         final_plan["effective_scores"] = analysis.get("effective_scores", {})
 
-        # ── SAVE TO NEON DB ──
+        # ── SAVE TO NEON DATABASE ──
         async with AsyncSessionLocal() as session:
             new_result = FMSResult(
                 input_profile=full_data,
@@ -342,4 +339,5 @@ async def generate_workout(profile: FMSProfileRequest):
         raise HTTPException(status_code=500, detail=f"Generator or DB Error: {str(e)}")
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)

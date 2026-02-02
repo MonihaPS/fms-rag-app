@@ -1,5 +1,4 @@
-# retriever.py: Removed pain_present references if any (none present).
-
+# retriever.py: No changes needed for deployment/testing - already good. Add debug print for DB load.
 import json
 import os
 from typing import Dict, Any, List, Optional
