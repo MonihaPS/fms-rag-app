@@ -247,7 +247,7 @@ async def get_db():
         yield session
 
 # ────────────────────────────────────────────────
-# MAIN ENDPOINT - Cleaned & Fixed
+# MAIN ENDPOINT
 # ────────────────────────────────────────────────
 @app.post("/generate-workout")
 async def generate_workout(
@@ -274,14 +274,8 @@ async def generate_workout(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Analyzer Error: {str(e)}")
 
-    # Early return if pain detected
-    if analysis.get("status") == "STOP":
-        return {
-            "session_title": "Medical Referral Required",
-            "coach_summary": f"Pain detected: {analysis.get('reason', 'Pain reported during screening')}",
-            "exercises": [],
-            "difficulty_color": "Red"
-        }
+    # ❌ REMOVED: The block that returned early if status == "STOP"
+    # We now proceed to retrieval/generation even if pain is flagged.
 
     # ─────────────────────────────────────────────────
     # 2. Retrieve relevant exercises

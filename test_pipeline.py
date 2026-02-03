@@ -1,186 +1,151 @@
+import pytest
 import json
-import asyncio
+import time
 import os
-import requests
-from typing import List, Dict
-import asyncpg
+import asyncio
+from sqlalchemy import create_engine, text
+from dotenv import load_dotenv
+
+# DeepEval Imports
 from deepeval import evaluate
-from deepeval.metrics import AnswerRelevancyMetric, FaithfulnessMetric, GEval
 from deepeval.test_case import LLMTestCase, LLMTestCaseParams
+from deepeval.metrics import FaithfulnessMetric, AnswerRelevancyMetric, GEval
 
-# ── CONFIG ────────────────────────────────────────────────
-DATABASE_URL = os.getenv("DATABASE_URL")  # must be in .env
-API_ENDPOINT = "http://127.0.0.1:8000/generate-workout"
+# Import Custom Judge
+from groq_judge import GroqJudge
 
-BATCH_SIZE = 5
-SKIP_FIRST_N = 13           # <--- we skip the first 13 newest records
-MAX_PROFILES_TO_TEST = 5  # safety limit after skipping
+# Import RAG Logic
+try:
+    from src.rag.retriever import get_exercises_by_profile
+    from src.rag.generator import generate_workout_plan
+except ImportError:
+    print("❌ ERROR: Could not find 'src' folder.")
+    exit()
 
-# ────────────────────────────────────────────────
-# Fetch real profiles — skipping the first N newest
-# ────────────────────────────────────────────────
-async def fetch_real_profiles(skip: int = SKIP_FIRST_N, limit: int = MAX_PROFILES_TO_TEST) -> List[Dict]:
-    clean_url = DATABASE_URL.replace("postgresql+asyncpg://", "postgresql://")
-    conn = await asyncpg.connect(clean_url)
-    try:
-        # Skip the newest skip records, then take the next limit records
-        rows = await conn.fetch("""
-            SELECT id, created_at, raw_json_data
-            FROM assessment_inputs
-            ORDER BY created_at DESC
-            OFFSET $1
-            LIMIT $2
-        """, skip, limit)
+# 1. Setup
+load_dotenv()
+
+# Initialize Groq Judge (Llama 3.3)
+# Make sure GROQ_API_KEY is in your .env file
+groq_evaluator = GroqJudge(model="llama-3.3-70b-versatile")
+
+# 2. Connect to Database (Simple Fetch)
+def get_latest_inputs(limit=5):
+    db_url = os.getenv("DATABASE_URL")
+    if not db_url:
+        raise ValueError("DATABASE_URL is not set in .env")
         
-        profiles = []
-        for row in rows:
-            try:
-                data = {
-                    "id": row["id"],
-                    "created_at": str(row["created_at"]),
-                    "profile": json.loads(row["raw_json_data"])
-                }
-                profiles.append(data)
-            except json.JSONDecodeError:
-                print(f"Skipping invalid JSON in row {row['id']}")
-                continue
-                
-        print(f"Fetched {len(profiles)} profiles (skipped first {skip} newest records)")
-        return profiles
-    finally:
-        await conn.close()
-
-# ────────────────────────────────────────────────
-# Call your API
-# ────────────────────────────────────────────────
-def call_api(payload: Dict) -> Dict | None:
-    try:
-        response = requests.post(API_ENDPOINT, json=payload, timeout=20)
-        response.raise_for_status()
-        return response.json()
-    except Exception as e:
-        print(f"  API call failed: {e}")
-        return None
-
-# ────────────────────────────────────────────────
-# Create evaluation batch
-# ────────────────────────────────────────────────
-def create_evaluation_batch(profiles_batch: List[Dict]) -> List[LLMTestCase]:
-    test_cases = []
+    # Fix for SQLAlchemy URL if needed
+    if "postgresql+asyncpg://" in db_url:
+        db_url = db_url.replace("postgresql+asyncpg://", "postgresql://")
+    if "postgres://" in db_url:
+        db_url = db_url.replace("postgres://", "postgresql://")
     
-    for entry in profiles_batch:
-        profile = entry["profile"]
-        profile_id = entry["id"]
-        created = entry["created_at"][:19]
-        
-        print(f"  → Sending profile #{profile_id} ({created}) to API...")
-        
-        api_response = call_api(profile)
-        
-        if not api_response:
-            print(f"    → Skipped: API failed")
-            continue
-            
-        actual_output = json.dumps(api_response, indent=2)
-        
-        # Simple rule-based expected outcome
-        has_pain = any(
-            d.get("pain", {}).get("pain_reported", 0) == 1 or
-            d.get("clearing_pain", False)
-            for d in profile.values() if isinstance(d, dict)
-        )
-        
-        squat_score = profile.get("overhead_squat", {}).get("score", 3)
-        
-        if has_pain:
-            expected = "Medical Referral Required + empty exercises + Red"
-        elif squat_score <= 1:
-            expected = "Corrective squat exercises (level 1–5) + Yellow/Red color"
-        elif squat_score == 2:
-            expected = "Moderate squat progressions/regressions + Yellow or Green"
-        else:
-            expected = "Green color + higher level squat exercises or general strength"
+    engine = create_engine(db_url)
+    with engine.connect() as conn:
+        # Simply get the latest 'limit' records. No complex offsets.
+        query = text("""
+            SELECT id, raw_json_data 
+            FROM assessment_inputs 
+            ORDER BY created_at DESC 
+            LIMIT :limit
+        """)
+        result = conn.execute(query, {"limit": limit})
+        return result.fetchall()
 
-        test_case = LLMTestCase(
-            input=f"Real user profile #{profile_id} ({created}):\n{json.dumps(profile, indent=2)}",
-            actual_output=actual_output,
-            expected_output=expected,
-            retrieval_context=[
-                "This is a REAL user-submitted FMS profile from the assessment_inputs table.",
-                "Current system is squat-only — all exercises must come from squat progressions.",
-                "Pain → referral. Low squat score → corrective exercises."
-            ]
-        )
-        test_cases.append(test_case)
-    
-    return test_cases
-
-# ────────────────────────────────────────────────
-# Metrics
-# ────────────────────────────────────────────────
-squat_rag_correctness = GEval(
-    name="Squat RAG Correctness (Real DB Profiles)",
-    criteria="""Check if the output follows correct squat FMS logic for real user data:
-- Pain detected → referral message + empty list + Red
-- overhead_squat ≤1 → corrective exercises (level 1–5), Yellow/Red
-- overhead_squat =2 → moderate progressions, Yellow/Green
-- overhead_squat =3 → higher level or general work, Green
-- Summary/tips should mention squat faults when present
-- No non-squat exercises allowed
-""",
+# 3. Define Metric (No Pain Logic)
+squat_correctness = GEval(
+    name="Squat RAG Correctness",
+    criteria="""Evaluate the workout plan compliance:
+    1. SCORING LOGIC:
+       - Score 1: Focus on "Corrective" or "Regression". Low intensity.
+       - Score 2: Focus on "Progression" or moderate intensity.
+       - Score 3: Focus on "Performance" or high intensity.
+    2. RELEVANCE: Exercises must be relevant to the user's movement capability.
+    3. SAFETY: Ensure exercises match the user's score level.
+    """,
     evaluation_steps=[
-        "Correct pain handling?",
-        "Low squat score → correct level & color?",
-        "Mentions relevant faults?",
-        "Only squat exercises used?",
-        "No hallucinated names?"
+        "Identify the squat score in the input.",
+        "Does the workout intensity/level match that score?",
+        "Are the exercises relevant?"
     ],
     evaluation_params=[LLMTestCaseParams.INPUT, LLMTestCaseParams.ACTUAL_OUTPUT],
-    model="gpt-4o-mini",
+    model=groq_evaluator, # Using Groq Judge
     async_mode=False
 )
 
-relevancy = AnswerRelevancyMetric(threshold=0.9)
-faithfulness = FaithfulnessMetric(threshold=0.9)
+# 4. Main Test Function
+async def test_all_users():
+    print("🚀 Starting Evaluation (Latest 5 Users)...")
 
-# ────────────────────────────────────────────────
-# MAIN - Batch processing
-# ────────────────────────────────────────────────
-async def main():
-    print("=== Confident AI Evaluation using REAL database profiles ===\n")
-    print(f"Skipping the first {SKIP_FIRST_N} newest records.\n")
+    # A. Get Data
+    rows = get_latest_inputs(limit=5)
     
-    profiles = await fetch_real_profiles(skip=SKIP_FIRST_N)
-    if not profiles:
-        print("No profiles found after skipping.")
+    if not rows:
+        print("✅ No users found in database.")
         return
-    
-    print(f"Processing {len(profiles)} profiles in batches of {BATCH_SIZE}...\n")
-    
-    for i in range(0, len(profiles), BATCH_SIZE):
-        batch = profiles[i:i + BATCH_SIZE]
-        batch_num = (i // BATCH_SIZE) + 1
-        print(f"\n{'═'*70}")
-        print(f"Batch {batch_num} — {len(batch)} profiles (records {i+1+SKIP_FIRST_N} to {min(i+BATCH_SIZE, len(profiles))+SKIP_FIRST_N})")
-        print(f"{'═'*70}\n")
-        
-        test_cases = create_evaluation_batch(batch)
-        
-        if test_cases:
-            print(f"Evaluating batch {batch_num} ({len(test_cases)} valid cases)...")
-            evaluate(
-                test_cases=test_cases,
-                metrics=[
-                    relevancy,
-                    faithfulness,
-                    squat_rag_correctness
-                ]
+
+    # B. Process One by One
+    for row in rows:
+        try:
+            # Parse Profile
+            if isinstance(row.raw_json_data, str):
+                profile = json.loads(row.raw_json_data)
+            else:
+                profile = row.raw_json_data
+            
+            print(f"\n   🔄 Processing User ID {row.id}...")
+
+            # --- 1. Run RAG ---
+            retrieval_output = await get_exercises_by_profile(profile)
+            retrieved_data = retrieval_output.get('data', [])
+            analysis = retrieval_output.get('analysis', {})
+            
+            # Format Context
+            retrieval_context = [
+                f"{ex.get('exercise_name', 'Unknown')}: {ex.get('description', '')}" 
+                for ex in retrieved_data
+            ]
+            
+            # Generate Plan
+            if asyncio.iscoroutinefunction(generate_workout_plan):
+                plan_output = await generate_workout_plan(analysis, retrieved_data)
+            else:
+                plan_output = generate_workout_plan(analysis, retrieved_data)
+            
+            actual_output_text = json.dumps(plan_output, indent=2)
+
+            # --- 2. Create Test Case ---
+            test_case = LLMTestCase(
+                input=f"User Profile: {json.dumps(profile)}",
+                actual_output=actual_output_text,
+                retrieval_context=retrieval_context
             )
-        else:
-            print("No valid API responses in this batch.")
-        
-        if i + BATCH_SIZE < len(profiles):
-            input("\nPress Enter to continue to next batch... ")
+
+            # --- 3. Evaluate (One by One) ---
+            # We explicitly recreate metrics to prevent state issues
+            faithfulness = FaithfulnessMetric(
+                threshold=0.9, 
+                model=groq_evaluator, 
+                include_reason=True, 
+                async_mode=False
+            )
+            relevancy = AnswerRelevancyMetric(
+                threshold=0.9, 
+                model=groq_evaluator, 
+                include_reason=True, 
+                async_mode=False
+            )
+
+            # Run evaluation
+            evaluate([test_case], metrics=[faithfulness, relevancy, squat_correctness])
+            
+            print("   ✅ Done. Moving to next user...")
+            time.sleep(1) # Brief pause
+
+        except Exception as e:
+            print(f"⚠️ Error processing row {row.id}: {e}")
+            continue
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(test_all_users())

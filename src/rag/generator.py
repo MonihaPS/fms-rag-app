@@ -47,6 +47,7 @@ def format_faults_for_prompt(full_data: Dict[str, Any]) -> str:
                             if 'heels_lift' in fault_name: interpretation = "→ ankle restriction"
                             elif 'knee_valgus' in fault_name: interpretation = "→ glute weakness / activation needed"
                             elif 'forward_lean' in fault_name: interpretation = "→ core / thoracic control"
+                            # Kept as requested (sub-input detail), but won't block generation
                             elif 'pain_reported' in fault_name: interpretation = "→ medical referral required"
                             test_faults.append(f"{clean_name} ({score_val}) {interpretation}")
                     except (ValueError, TypeError):
@@ -68,14 +69,8 @@ def generate_workout_plan(analysis_context: Dict[str, Any], exercises: List[Dict
         print(f"❌ Error [{call_id}]: GROQ_API_KEY is missing.")
         return {"session_title": "Config Error", "coach_summary": "System configuration error (API Key).", "exercises": []}
 
-    # Safety checks
-    if analysis_context.get('status') == "STOP":
-        return {
-            "session_title": "Medical Referral Required",
-            "coach_summary": "Pain was reported during screening. Do NOT proceed with corrective exercise. Please consult a medical professional.",
-            "difficulty_color": "Red",
-            "exercises": []
-        }
+    # REMOVED: The strict "Medical Referral Required" return block.
+    # The code now proceeds to generate a workout even if status was "STOP".
 
     if not exercises:
         return {
@@ -140,7 +135,7 @@ def generate_workout_plan(analysis_context: Dict[str, Any], exercises: List[Dict
         {exercise_list}
 
         ### INSTRUCTIONS
-        1. Select 3–5 most relevant exercises that address the key faults.
+        1. Select 3 top most relevant exercises that address the key faults.
         2. Create short, specific 'coach_tip' cues mentioning the actual fault.
         3. Set difficulty_color: Red if severe faults, Yellow if moderate, Green if minor/cleared.
         4. Return valid JSON matching the schema exactly.
@@ -157,6 +152,7 @@ def generate_workout_plan(analysis_context: Dict[str, Any], exercises: List[Dict
 
         # Invoke
         response = chain.invoke({
+            # We pass the status, but the LLM will now generate a workout instead of hard-stopping
             "status": analysis_context.get('status', 'TRAINING'),
             "level": str(analysis_context.get('target_level', 1)),
             "faults_text": faults_text,

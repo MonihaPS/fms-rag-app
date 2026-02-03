@@ -39,7 +39,7 @@ FAULT_TO_TAG_MAP = {
     "asymmetry_present": "fix_asymmetry",
     "spine_flexion": "fix_lumbar_flexion",
     "scapular_winging": "pattern_shoulder",
-    "pain_reported": "stop",
+    # REMOVED: "pain_reported": "stop" 
     "knee_bends": "fix_knee_instability",
     "hip_externally_rotates": "fix_hip_rotation",
     "foot_lifts_off_floor": "fix_heels_lift",
